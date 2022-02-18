@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}ค้นหาเบอร์โทร{% endblock title %}
+{% load static %}
+{% block body %}
+<div class="container pay-height">
+    <form class="" action="{% url 'searchdata' %}" method="get">
+        <p style="text-align: center;font-size: 18px;margin-top: 20px;"><b>แจ้งการโอนชำระสมัครสมาชิก</b></p>
+        <div class="text-center mb-4">
+            <img class="mb-4" src="{% static 'img/logo.png' %}" alt="" width="105" height="77.63">
+        </div>
+        <div class="input-group mb-3" style="margin-top:3%">
+            <input type="text" class="form-control" name="q" placeholder="กรอกเบอร์โทรศัพท์" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" style="background-color: #084A0F;" type="submit">ค้นหา</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}

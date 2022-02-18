@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}สมัครสมาชิก{{package.name_package}}{% endblock title %}
+{% load humanize %}
+{% block body %}
+<div class="container">
+    <div class="row" style="margin-bottom: 5%; margin-top: 2%">
+        <div class="col-12 hero-image">
+            <a href="#">
+                <img class="shadow rounded" src="{{package.image_package2.url}}" alt="HTML tutorial"
+                    style="width: 100%" />
+                <div class="hero-text">{{package.name_package}}</div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="margin-bottom: 5%">
+            <h5>สมัครสมาชิก Richest Grows</h5>
+            <h4>ตำแหน่ง {{package.name_package}}</h4>
+            <b>แพคเกจ {{package.price_package|intcomma}} บาท</b>
+            <p>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;บริษัทจะจัดสินค้าให้ท่านเองตามราคาแพคเกจและจะจัดส่งหลังอนุมัติการสมัครของท่านเรียบร้อยแล้ว
+                ยืนยันการสมัครสมาชิกสำเร็จโดยผ่านอีเมล
+            </p>
+            <b>เงื่อนไข</b>
+            <ul type="disc" style="line-height: 1.8">
+                <li>{{package.bodytext|safe}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center" style="margin-top: 5%">
+            <a href="{% url 'deliveryDetail' package.id %}">
+                <button type="submit" class="btn-btn">สมัครสมาชิก</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock body %}

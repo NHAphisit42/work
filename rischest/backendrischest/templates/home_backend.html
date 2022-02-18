@@ -1,0 +1,111 @@
+{% extends 'base_backend.html' %}
+{% block title %}หน้าแรก{% endblock title %}
+{% load static %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">หน้าหลัก</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">หน้าหลัก</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">สมาชิกใหม่ &nbsp;&nbsp;<img src="{% static 'backend/img/member-card.png' %}" width="40px" alt="">&nbsp; ({{mbcount}})</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{% url 'member_backend' %}">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">คำสั่งการสั่งซื้อ &nbsp;&nbsp;<img src="{% static 'backend/img/shopping-cart.png' %}" width="40px" alt="">&nbsp; ()</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{% url 'table_backend' %}">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">อนุมัติสมาชิก &nbsp;&nbsp;<img src="{% static 'backend/img/id-card.png' %}" width="40px" alt="">&nbsp; (0)</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">สมาชิกรอการยืนยัน &nbsp;&nbsp;<img src="{% static 'backend/img/add-user.png' %}" width="40px" alt="">&nbsp; (0)</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white bg-info mb-4">
+                    <div class="card-body">สินค้ารอจัดส่ง &nbsp;&nbsp;<img src="{% static 'backend/img/cargo.png' %}" width="40px" alt="">&nbsp; (0)</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">จัดส่งสินค้าแล้ว &nbsp;&nbsp;<img src="{% static 'backend/img/delivery-box.png' %}" width="40px" alt="">&nbsp; (0)</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="">ดูรายละเอียด</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ข้อมูลสมาชิก
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">ชื่อ-นามสกุล</th>
+                            <th style="text-align: center;">โทรศัพท์</th>
+                            <th style="text-align: center;">แพจเกจ</th>
+                            <th style="text-align: center;">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>โทรศัพท์</th>
+                            <th>แพจเกจ</th>
+                            <th>สถานะ</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for mb in mb %}
+                          <tr>
+                            <td>{{mb.name}}</td>
+                            <td style="text-align: center;">{{mb.phone}}</td>
+                            <td style="text-align: center;">{{mb.package}}</td>
+                            {% if mb.status_member == None %}
+                            <td style="text-align: center; color: orange;">รอการอนุมัติ</td>
+                            {% elif mb.status_member == True %}
+                            <td style="text-align: center; color: green;">อนุมัติแล้ว</td>
+                            {% else %}
+                            <td style="text-align: center; color: red;">ไม่อนุมัติ</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

@@ -1,0 +1,50 @@
+{% extends "base_backend.html" %}
+{% block title %}ตารางหมวดหมู่{% endblock title %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">ตารางหมวดหมู่</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addproduct_backend' %}">เพิ่มสินค้า</a></li>
+            <li class="breadcrumb-item active">ตารางหมวดหมู่</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ตารางหมวดหมู่
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">ชื่อหมวดหมู่สินค้า</th>
+                            <th style="text-align: center;">ชื่อเล่นหมวดหมู่สินค้า</th>
+                            <th style="text-align: center;">รูปภาพหมวดหมู่สินค้า</th>
+                            <th style="text-align: center;"><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>โทรศัพท์</th>
+                            <th>ที่อยู่</th>
+                            <th><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for categories in categories %}
+                        <tr>
+                            <td>{{categories.name}}</td>
+                            <td>{{categories.slug}}</td>
+                            <td style="text-align: center;"><img src="{{categories.img.url}}" width="64px;" alt=""></td>
+                            <td style="text-align: center;"><a href="" class="btn btn-warning" role="button">แก้ไข</a> / <a href="" class="btn btn-danger" role="button" onclick="return confirm('คุณต้องการลบใช่หรือไม่ ?')">ลบ</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

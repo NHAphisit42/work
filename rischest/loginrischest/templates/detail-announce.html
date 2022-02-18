@@ -1,0 +1,35 @@
+{% extends "home_base.html" %}
+{% block title %}{{announce.name}}{% endblock title %}
+{% load static %}
+{% load thaidate %}
+{% block body %}
+<main>
+    <div class="container">
+        <div class="mx-5">
+            <div class="">
+                <div class="col-lg-12 wrap-header">
+                    <h1 class="text-center mt-5"><b>ข่าวสาร/ประชาสัมพันธ์ </b></h1>
+                    <h4 class="text-center">เรื่อง {{announce.name}}</h4>
+                    <div class="line-header mt-3"></div>
+                </div>
+                <div class="album">
+                    <div class="row mt-4">
+                        <div class="col mb-3">
+                            <div class="card">
+                                <img src="{{announce.image.url}}" class="card-img-top" alt="..." style="width: 100%;">
+                                <div class="card-body">
+                                    <p class="card-text"><small class="text-muted">{{announce.created | thaidate:"d M Y"}}</small></p>
+                                    <h5 class="card-title"><b>{{announce.name}}</b></h5>
+                                    <div>
+                                        <p>{{announce.description | safe}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}ล็อกอิน{% endblock title %}
+{% load static %}
+{% block body %}
+<div id="img-login">
+    <div class="container">
+        <div class="bg-img">
+            <div class="container">
+                <form action="{% url 'login_views' %}" class="form-signin" method="post" style="background-color:#FFF;">
+                    {% csrf_token %}
+                    <div class="text-center mb-4">
+                        <img class="mb-4" src="{% static 'img/logo.png' %}" alt="" width="105" height="77.63">
+                        <h4 class="h4 mb-3 font-weight-normal">เข้าสู่ระบบสมาชิก</h4>
+                    </div>
+                    {% for message in messages%}
+                    <div class="alert alert-danger" role="alert">
+                       {{message}}
+                      </div>
+                    {% endfor%}
+                    <div class="form-label-group">
+                        <input type="text" name="username" id="inputEmail" class="form-control shadow-sm p-2 mb-sm-4 bg-body rounded" placeholder="กรอกรหัสสมาชิก" required="" autofocus="">
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" name="password" id="inputPassword" class="form-control  shadow-sm p-2 mb-sm-4 bg-body rounded" placeholder="กรอกรหัสผ่าน" required="" autofocus="">
+                    </div>
+                    <button class="btn-btn" type="submit" onclick="login()">เข้าสู่ระบบ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function login(){
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            imageUrl: 'img/logo.png',
+            title: 'เข้าสู่ระบบ',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+</script>
+{% endblock body %}

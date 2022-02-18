@@ -1,0 +1,32 @@
+{% load static %}
+        <div style="background-color: black;">
+            <div class="container text-white">
+                <footer cllass="py-3 my-4"  style="font-size: 0.7rem;color:white;">
+                    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                        <li class="nav-item px-3 border-right border-left">
+                            <a href="{% url 'home_richest' %}">หน้าแรก</a> 
+                        </li>
+                        <li class="nav-item px-3 border-right">
+                            <a href="{% url 'register' %}">สมัครสมาชิก</a>
+                        </li>
+                        <li class="nav-item px-3 border-right">
+                            <a href="{% url 'cartdetail' %}">แจ้งการโอนชำระ</a>   
+                        </li>
+                        <li class="nav-item px-3 border-right">
+                            <a href="{% url 'login' %}">เข้าสู่ระบบ</a> 
+                        </li>
+                    </ul>
+                </footer>
+                <footer class="my-4"  style="font-size: 0.7rem;">
+                    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item"><a href="https://www.facebook.com/richestglobal" target="_brank" class="nav-link px-2 text-white"><i class='fab fa-facebook-square' style='font-size:24px'></i></a></li>
+                    <li class="nav-item"><a href="tel:0954953878" target="_brank"class="nav-link px-2 text-white"><i class='fas fa-phone-square-alt' style='font-size:24px'></i></a></li>
+                    <li class="nav-item"><a href="http://line.me/ti/p/~@richesthome" terget="_brank" class="nav-link px-2 text-white"><i class='fab fa-line' style='font-size:24px'></i></a></li>
+                    </ul>
+                    <p class="text-center text-white">บริษัท พันล้านความงาม จำกัด <br> 444 ม. 4 ต.บางบ่อ อ.บางบ่อ จ.สมุทรปราการ 10560 </p>
+                    <p class="text-center text-white">© 2022 Company, Inc</p>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

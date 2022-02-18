@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}แจ้งการโอนชำระ{% endblock title %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+    <div>
+        <p style="text-align: center;font-size: 18px;margin-top: 20px;"><b>รายการคำสั่งซื้อสำเร็จ</b></p>
+    </div>
+    <div class="row mb-4">
+        <div class="col p-3  text-white" style="background-color:#084A0F;text-align: center;font-size: 18px;">
+            จำนวนเงินที่ต้องชำระ
+        </div>
+        <div class="col p-3 text-white" style="background-color:#C20000;text-align: center;font-size: 18px;">
+            สถานะการสั่งซื้อ
+        </div>
+    </div>
+    <div class="row">
+        <div class="col p-3 text-white" style="background-color:#FFC403;text-align: center;font-size: 18px;">
+            ช่องทางการชำระเงิน
+        </div>
+    </div>
+    <div class="row">
+        <div class="col p-3 " style="background-color:#EFEFEF;text-align: center;font-size: 18px;">
+            <b>
+                ชื่อบัญชี บกจ. พันล้านความงาม
+            </b>
+        </div>
+    </div>
+    <div class="row justify-content-center mb-5" style="background-color:#EFEFEF;">
+        <div class="col-2 d-flex justify-content-end">
+            <img src="{% static 'icon/kbank.png' %}" alt="" width="50px;">
+        </div>
+        <div class="col-4 text-right">
+            ธนาคารกสิกรไทย
+        </div>
+        <div class="col-6">
+            เลขบัญชี 032-3-86372-5
+        </div>
+
+    </div>
+
+    <a href="{% url 'search' %}">
+        <button type="button" class="btn  btn-lg btn-block" style="border-radius:2rem;">แจ้งการโอนชำระ</button>
+    </a>
+</div>
+
+
+{% endblock body %}

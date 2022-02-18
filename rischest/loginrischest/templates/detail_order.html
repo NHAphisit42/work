@@ -1,0 +1,86 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+    <a href="order-history.php"><i class='fas fa-arrow-left' style='font-size:24px;color:black;'></i></a>
+    <span class="navbar-text">
+        <h5>&nbsp;คำสั่งซื้อ #001</h5>
+    </span>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex p-2"><h5>ที่อยู่ในการจัดส่ง</h5></div>
+            <div class="add"></div>
+            <div class="media-body mt-3 pl-4">
+                <p style="margin-top: 0;margin-bottom: 0rem;">สมควร ควรมี</p>
+                <p style="margin-top: 0;margin-bottom: 0rem;">09 9999 9999</p>
+                <p>99/99 ซอย 123 ถนน ตัดใหม่ ตำบล นอกเมือง อำเภอ ในเมือง จังหวัด นครราชสีมา 44223 </p>
+            </div>
+            <hr>
+         
+            <div class="media-body">   
+                <div class="d-flex p-2"><h5>รายละเอียดการชำระเงิน</h5></div>
+                <div class="row pl-4">
+                    <div class="col-6">
+                        <p style="margin-top: 0;margin-bottom: 0.5rem;">วันที่สั่งซื้อ</p>
+                        <p style="margin-top: 0;margin-bottom: 0rem;">25-01-2021 09.30 น.</p>
+                    </div>
+                    <div class="col-6">
+                        <p style="margin-top: 0;margin-bottom: 0.5rem;">วันที่แจ้งโอนชำระเงิน</p>
+                        <p style="margin-top: 0;margin-bottom: 0rem;">25-01-2021 10.30 น.</p>   
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="media-body"> 
+                <div class="d-flex p-2"><h5>รายการคำสั่งซื้อ</h5></div>
+                <div class="row pl-5">                           
+                    <div class="media">
+                        <img class="mr-3" src="{% static 'img/1.jpg' %}" alt="Generic placeholder image" width="64px;">
+                        <div class="media-body">
+                            <h5 class="mt-0">ชื่อสินค้า</h5>
+                            <p>ตัวเลือกสินค้า เช่น สี รสชาติ</p>
+                        <div class="d-flex">
+                                <div class="p-2">X100</div>
+                                <div class="ml-auto p-2">฿500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row pl-5">                           
+                    <div class="media">
+                        <img class="mr-3" src="{% static 'img/1.jpg' %}" alt="Generic placeholder image" width="64px;">
+                        <div class="media-body">
+                            <h5 class="mt-0">ชื่อสินค้า</h5>
+                            <p>ตัวเลือกสินค้า เช่น สี รสชาติ</p>
+                        <div class="d-flex">
+                                <div class="p-2">X100</div>
+                                <div class="ml-auto p-2">฿500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-8 d-flex flex-row-reverse p-2">รวมราคาสินค้า</div>
+                <div class="col-4 d-flex flex-row-reverse p-2">50,000</div>
+            </div>
+            <div class="row">
+                <div class="col-8 d-flex flex-row-reverse p-2">ค่าจัดส่ง</div>
+                <div class="col-4 d-flex flex-row-reverse p-2">200</div>
+            </div>
+            <div class="row">
+                <div class="col-8 d-flex flex-row-reverse p-2">ยอดคำสั่งซื้อทั้งหมด</div>
+                <div class="col-4 d-flex flex-row-reverse p-2">50,200</div>
+            </div>
+            <div class="row">
+                <div class="col-8 d-flex flex-row-reverse p-2">สถานะการชำระเงิน</div>
+                <div class="col-4 d-flex flex-row-reverse p-2">ชำระเงินแล้ว</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

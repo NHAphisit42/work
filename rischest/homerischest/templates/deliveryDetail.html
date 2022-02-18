@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ที่อยู่จัดส่ง{% endblock title %}
+{% block body %}
+<main>
+    <nav class="navbar" style="background-color: #ffffff">
+        <span class="navbar-text">
+            <h5>สมัครสมาชิก Richest Grows - การสั่งซื้อ</h5>
+        </span>
+    </nav>
+    <!-- <div class="col d-flex justify-content-end pad" style=" z-index:1; position:relative; right : 225px ; top : 400px"></div> -->
+    <form id="form" name="form" action="{% url 'address' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h5>ที่อยู่ในการจัดส่ง</h5>
+                    <div class="add"></div>
+                    <div class="row align-items-center" style="margin-top:3%">
+                        <div class="col align-items-center pad">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">ชื่อผู้รับสินค้า :</label>
+                                    <input type="text" class="hide" name="name" required><span id="name"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label for="">หมายเลขโทรศัพท์ :</label>
+                                    <input type="text" class="hide" name="phone" required><span id="phone"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">รายละเอียดที่อยู่ :</label>
+                                    <input type="text" class="hide" name="address" required><span id="address"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label for="">ตำบล/แขวง :</label>
+                                    <input type="text" class="hide" name="zone" required><span id="zone"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">อำเภอ/เขต :</label>
+                                    <input type="text" class="hide" name="district" required><span id="district"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label for="">จังหวัด :</label>
+                                    <input type="text" class="hide" name="province" required><span id="province"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">รหัสไปรษณีย์ :</label>
+                                    <input type="text" class="hide" name="ZIP_code" required><span id="ZIP_code"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label for="">แพคเกจ :</label>
+                                    <input type="text" class="hide" name="package" value="{{package.name_package}}"
+                                        required><span id="package"></span>
+                                </div>
+                            </div>
+                            <button id="op" onclick="document.getElementById('id01').style.display='block'"
+                                onclick="document.getElementById" style="width:auto;">เพิ่มที่อยู่ใหม่</button>
+                        </div>
+                    </div>
+                    <div class="add"></div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:3%">
+                <div class="card-body">
+                    <h5>แพคเกจ</h5>
+                    <div class="row" style="margin-bottom: 5%;margin-top:2%">
+                        <div class="col-12 hero-image">
+                            <a href="#">
+                                <img class="rounded" src="{{package.image_package2.url}}" alt="HTML tutorial"
+                                    style="width: 100%;">
+                                <div class="hero-text">
+                                    {{package.name_package}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:3%;background-color:#F5FFF6;">
+                <div class="card-body">
+                    <h5>ตัวเลือกในการจัดส่ง</h5>
+                    <input type="text" name="choose_delivery" id="choose_delivery" class="hide" required>
+                    <input type="number" class="hide" name="total_delivery" id="total_delivery" required>
+                    <div class="row align-items-center" style="margin-top:3%">
+                        <div class="col align-items-center pad">
+                            <p><span id="deli"></span></p>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <a href="#" onclick="document.getElementById('id02').style.display='block'">
+                                <img src="{% static 'icon/Layer-2.png' %}" alt="">
+                            </a>
+                            <p id="demo"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:3%;">
+                <div class="card-body">
+                    <h5>รายการคำสั่งซื้อ</h5>
+                    <hr>
+                    <div class="row align-items-center" style="margin-top:3%">
+                        <div class="col align-items-center pad">
+                            {{package.name_package}}
+                        </div>
+                        <div class="col d-flex justify-content-end pad">
+                            <p><span id="num2"></span> บาท</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:1%">
+                        <div class="col align-items-center pad">
+                            ค่าจัดส่ง
+                        </div>
+                        <div class="col d-flex justify-content-end pad">
+                            <p><span id="price"></span> บาท</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:1%">
+                        <div class="col align-items-center pad">
+                            <b>สรุปยอดการสั่งซื้อ</b>
+                        </div>
+                        <div class="col d-flex justify-content-end pad">
+                            <p><span id="num1" style="color: red;"></span> บาท</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:3%;">
+                <div class="card-body">
+                    <div class="col-12 text-center">
+                        <button type="submit" id="reset" class="btn-btn">สมัครสมาชิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!---------------------------------------address----------------------------------------------->
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+        <form id="myform" name="myform" class="modal-content" action="{% url 'address' %}" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <h4>ที่อยู่ในการจัดส่ง</h4>
+                <p>กรุณากรอกข้อมูลให้ครบถ้วนอย่างละเอียดและต้องเป็นที่อยู่ปัจจุบันในการรับสินค้า</p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name"><b>ชื่อผู้รับสินค้า</b></label>
+                        <input type="text" placeholder="ชื่อ - นามสกุล" class="name" required>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone"><b>หมายเลขโทรศัพท์</b></label>
+                        <input type="text" pattern="[0-9]{1,}" maxlength="10" minlength="10" title="กรอกตัวเลขเท่านั้น"
+                            placeholder="08x-xxx-xxxx" class="phone" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="address"><b>รายละเอียดที่อยู่</b></label>
+                        <input type="text" placeholder="เช่น บ้านเลขที่, ซอย, ถนน" class="address" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="zone"><b>ตำบล/แขวง</b></label>
+                        <input type="text" placeholder="กรอกตำบล/แขวง" class="zone" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="district"><b>อำเภอ/เขต</b></label>
+                        <input type="text" placeholder="กรอกอำเภอ/เขต" class="district" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="province"><b>จังหวัด</b></label>
+                        <input type="text" placeholder="กรอกจังหวัด" class="province" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ZIP_code"><b>รหัสไปรษณีย์</b></label>
+                        <input type="text" pattern="[0-9]{1,}" title="กรอกตัวเลขเท่านั้น" maxlength="5" minlength="5"
+                            placeholder="กรอกรหัสไปรษณีย์" class="ZIP_code" required>
+                    </div>
+                    <div class="col-md">
+                        <label for="Diamond">แพคเกจ</label>
+                        <input type="text" name="package" value="{{package.name_package}}" class="package" readonly
+                            required>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                        class="cancelbtn">ยกเลิก</button>
+                    <button type="submit" id="001" class="signupbtn">บันทึก</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-----------------------------------end address ---------------------------------------------->
+
+
+
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+        <form class="modal-content-ad" action="address_diamond" target="#demo">
+            <div class="container">
+                <h4>ตัวเลือกการจัดส่ง</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12" style="margin:2%;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="option1">
+                            <label class="form-check-label" for="exampleRadios1">
+                                จัดส่งภายในประเทศ
+                            </label>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12" style="margin:2%;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                รับสินค้าด้วยตัวเอง
+                                <p><b style="color:red;">หมายเหตุ :</b> ฟรีค่าจัดส่ง
+                            </label>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="col-md-12" style="margin:2%;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                value="option3">
+                            <label class="form-check-label" for="exampleRadios3">
+                                จัดส่งต่างประเทศ
+                                <p><b style="color:red;">หมายเหตุ :</b> ติดต่อคำนวณค่าจัดส่งตามจริงได้ที่ <b>Line@ :
+                                        @growsparthner</b>
+                                    โดยแจ้งชื่อและเบอร์โทรศัพท์ที่กรอกในข้อมูลการจัดส่งสินค้าเพื่อง่ายต่อการตรวจสอบ
+                                </p>
+                            </label>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn">ยกเลิก</button>
+                    <button type="button" id="002" onclick="document.getElementById('id02').style.display='none'"
+                        class="signupbtn" id="submit">บันทึก</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- ส่วนที่ให้หน้า refresh ค่าเสมอ เวลากด back -->
+<script type='text/javascript'>
+    // JavaScript anonymous function
+    (() => {
+        if (window.localStorage) {
+            if (!localStorage.getItem('reload')) {
+                localStorage['reload'] = true;
+                window.location.reload();
+            } else {
+                localStorage.removeItem('reload');
+            }
+        }
+    })();
+
+    $(document).ready(function () {
+        $("#myform").submit(function (e) {
+            e.preventDefault()
+            var package = $(".package").val();
+            $("#package").html("{{package.name_package}}");
+            $('input[name="package"]').val("{{package.name_package}}");
+        });
+    });
+
+    var choose_delivery = document.getElementById("choose_delivery")
+
+    var package_price = "{{package.price_package}}";
+    var x = parseInt(package_price);
+    var y;
+    if (x > 0 && x < 5000) {
+        y = 50;
+    } else if (x >= 5000 && x <= 10000) {
+        y = 70;
+    } else if (x >= 10000 && x <= 30000) {
+        y = 90;
+    } else if (x >= 30000 && x <= 50000) {
+        y = 120;
+    } else if (x >= 50000 && x <= 100000) {
+        y = 150;
+    } else if (x > 100000) {
+        y = 230;
+    } else {
+        y = "";
+    }
+
+    var z = y + x;
+    var total_delivery = document.getElementById("total_delivery");
+
+    $(document).ready(function () {
+        $('#exampleRadios1').click(function (e) {
+            var choose_delivery = document.getElementById("choose_delivery");
+            choose_delivery.value = "จัดส่งภายในประเทศ : ค่าจัดส่ง " + y + " บาท";
+            document.getElementById("deli").innerHTML = "จัดส่งภายในประเทศ : ค่าจัดส่ง " + y + " บาท";
+            document.getElementById("price").innerHTML = y;
+            let z = x + y;
+            function numberWithCommas(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            let n = numberWithCommas(z);
+            console.log(n); // "234,234.555"
+            $('#num1').html(n);
+
+            let m = numberWithCommas(x);
+            console.log(m); // "234,234.555"
+            $('#num2').html(m);
+            total_delivery.value = parseInt(z);
+        });
+
+        $('#exampleRadios2').click(function (e) {
+            var choose_delivery = document.getElementById("choose_delivery");
+            choose_delivery.value = "รับสินค้าด้วยตัวเอง : ฟรีค่าจัดส่ง";
+            document.getElementById("deli").innerHTML = "รับสินค้าด้วยตัวเอง : ฟรีค่าจัดส่ง";
+            let y = 0;
+            document.getElementById("price").innerHTML = y;
+            let z = x + y;
+            function numberWithCommas(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            let n = numberWithCommas(z);
+            console.log(n); // "234,234.555"
+            $('#num1').html(n);
+
+            let m = numberWithCommas(x);
+            console.log(m); // "234,234.555"
+            $('#num2').html(m);
+            total_delivery.value = parseInt(z);
+
+        });
+        $('#exampleRadios3').click(function (e) {
+            var choose_delivery = document.getElementById("choose_delivery");
+            choose_delivery.value = "จัดส่งต่างประเทศติดต่อคำนวณค่าจัดส่งตามจริงได้ที่ Line@ : @growsparthner โดยแจ้งชื่อและเบอร์โทรศัพท์ที่กรอกในข้อมูลการจัดส่งสินค้าเพื่อง่ายต่อการตรวจสอบ";
+            document.getElementById("deli").innerHTML = "จัดส่งต่างประเทศติดต่อคำนวณค่าจัดส่งตามจริงได้ที่ Line@ : @growsparthner โดยแจ้งชื่อและเบอร์โทรศัพท์ที่กรอกในข้อมูลการจัดส่งสินค้าเพื่อง่ายต่อการตรวจสอบ";
+            let y = 0;
+            document.getElementById("price").innerHTML = y;
+            let z = x + y;
+            function numberWithCommas(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            let n = numberWithCommas(z);
+            console.log(n); // "234,234.555"
+            $('#num1').html(n);
+
+            let m = numberWithCommas(x);
+            console.log(m); // "234,234.555"
+            $('#num2').html(m);
+            total_delivery.value = parseInt(z);
+        });
+    });
+</script>
+{% endblock body %}

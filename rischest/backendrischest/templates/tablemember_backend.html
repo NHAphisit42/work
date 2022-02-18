@@ -1,0 +1,67 @@
+{% extends 'base_backend.html' %}
+{% block title %}สมาชิก{% endblock title %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">ข้อมูลสมาชิก</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item active">ข้อมูลสมาสิก</li>
+        </ol>
+        <div>
+            <a class="btn btn-info" href="{% url 'addmember_backend' %}" role="button">เพิ่มสมาชิก</a>
+        </div><br>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ข้อมูลสมาชิก
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">คำนำหน้า</th>
+                            <th style="text-align: center;">ชื่อ-นามสกุล</th>
+                            <th style="text-align: center;">โทรศัพท์</th>
+                            <th style="text-align: center;">ผู้แนะนำ</th>
+                            <th style="text-align: center;">สถานะ</th>
+                            <th style="text-align: center;">เพิ่มเติม</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>คำนำหน้า</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>โทรศัพท์</th>
+                            <th>ผู้แนะนำ</th>
+                            <th>สถานะ</th>
+                            <th>เพิ่มเติม</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for member in member %}
+                        <tr>
+                            <td>{{member.gender}}</td>
+                            <td>{{member.name}}</td>
+                            <td>{{member.phone}}</td>
+                            <td>{{member.recommen}}</td>
+                            {% if member.status_member == None %}
+                            <td style="text-align: center;">
+                                <a href="{% url 'approve' status_id=member.id %}" onclick="return confirm('ต้องการอนุมัติไหม')" class="btn btn-success">อนุมัติ</a>
+                                <a class="btn btn-danger" href="{% url 'disapprove' status_id=member.id %}" onclick="return confirm('ต้องการไม่อนุมัติไหม')">ไม่อนุมัติ</a>
+                            </td>
+                            {% elif member.status_member == False %}
+                            <td style="text-align: center; color: red;">ไม่อนุมัติแล้ว</a></td>
+                            {% else %}
+                            <td style="text-align: center; color: green;">อนุมัติแล้ว</a></td>
+                            {% endif %}
+                            <td style="text-align: center;"><a class="btn btn-info" href="{% url 'member' member.id %}" role="button">ดูข้อมูล</a> / <a class="btn btn-danger" role="button" href="{% url 'removeregister' member.id %}" onclick="return confirm('คุณต้องการลบใช่หรือไม่ ?')">ลบข้อมูล</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

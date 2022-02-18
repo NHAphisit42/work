@@ -1,0 +1,61 @@
+{% extends 'base_backend.html' %}
+{% block title %}คำสั่งซื้อ{% endblock title %}
+{% load thaidate %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">คำสั่งซื้อ</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'table_backend' %}">ย้อนกลับ</a></li>
+            <li class="breadcrumb-item active">คำสั่งซื้อ</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>รหัสใบสั่งซื้อ {{order.id}} วันเวลาสั่งซื้อ : {{order.date | thaidate:"d M Y เวลา H:i น."}} แพจเกจ :
+                    {{order.package}}</h4>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row my-2">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 text-left">
+                                    <address>
+                                        <strong>ผู้ขายสินค้า:</strong><br>
+                                        บริษัท พันล้านความงาม จำกัด<br>
+                                        444 ม. 4 ตำบล บางบ่อ อำเภอ บางบ่อ <br>
+                                        จังหวัด สมุทรปราการ <br>
+                                        10560
+                                    </address>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <address>
+                                        <strong>ผู้ซื้อสินค้า:</strong><br>
+                                        ชื่อ :{{order.name}}<br>
+                                        เบอร์โทรศัทพ์ :{{order.phone}} <br>
+                                        ที่อยู่ : {{order.address}} ตำบล {{order.zone}} อำเภอ {{order.district}}<br>
+                                        จังหวัด {{order.province}}<br>
+                                        {{order.ZIP_code}}
+                                    </address>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary pull-right" id="btnPrint"><i class="fas fa-print"></i>
+                        ปริ้นใบสั่งซื้อ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const $btnPrint = document.querySelector("#btnPrint");
+        $btnPrint.addEventListener("click", () => {
+            window.print();
+        });
+    </script>
+</main>
+{% endblock body %}

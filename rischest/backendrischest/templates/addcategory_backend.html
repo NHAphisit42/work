@@ -1,0 +1,41 @@
+{% extends "base_backend.html" %}
+{% block title %}เพิ่มหมวดหมู่สินค้า{% endblock title %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">เพิ่มหมวดหมู่สินค้า</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addproduct_backend' %}">ย้อนกลับ</a></li>
+            <li class="breadcrumb-item active">เพิ่มหมวดหมู่สินค้า</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-ad"></i>
+                เพิ่มหมวดหมู่สินค้า
+            </div>
+            <div class="card-body">
+                <form action="{% url 'category' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="รายละเอียดสินค้า">ชื่อหมวดหมู่สินค้า</label>
+                            <input type="text" name="name" class="form-control" placeholder="ชื่อหมวดหมู่สินค้า">
+                        </div>
+                        <div class="col-4">
+                            <label for="หมวดหมู่สินค้า">ชื่อเล่นหมวดหมู่สินค้า <small style="color: red;">**ชื่อเล่นหมวดหมู่ควรตั้งเป็นภาษาอังกฤษ</small></label>
+                            <input type="text" class="form-control" name="slug">
+                        </div>
+                        <div class="col-4">
+                            <label for="">รูปภาพหมวดหมู่</label>
+                            <input type="file" name="img" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-success col-sm-2" type="submit">เพิ่มหมวดหมู่สินค้า</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

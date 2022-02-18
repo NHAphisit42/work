@@ -1,0 +1,167 @@
+{% extends 'base_backend.html' %}
+{% block title %}เพิ่มสมาชิก{% endblock title %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">เพิ่มสมาชิก</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="">ย้อนกลับ</a></li>
+            <li class="breadcrumb-item active">เพิ่มสมาชิก</li>
+        </ol>
+        {% for message in messages%}
+        <div class="alert alert-success" role="alert">
+           {{message}}
+        </div>
+        {% endfor%}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                เพิ่มสมาชิก
+            </div>
+            <div class="card-body">
+                <form action=" {% url 'addmember' %} " method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="from-group col-md-2">
+                            <label for="gender">คำนำหน้า</label>
+                            <select id="gender" class="form-control" name="gender">
+                                <option selected>เลือก...</option>
+                                <option value="นาย">นาย</option>
+                                <option value="นางสาว">นางสาว</option>
+                                <option value="นาง">นาง</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label for="name">ชื่อจริง-นามสกุล</label>
+                            <input type="text" name="name" id="name" class="form-control"
+                                placeholder="ชื่อจริง (ไม่ต้องพิมพ์คำนำหน้า)">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="phone">เบอร์โทรศัพธ์</label>
+                            <input type="text" pattern="[0-9]{1,}" title="กรอกตัวเลขเท่านั้น" maxlength="10" minlength="10" name="phone" id="phone" class="form-control" placeholder="เบอร์โทรศัพธ์" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="short">อีเมล์</label>
+                            <input type="text" name="useremail" id="useremail" class="form-control"
+                                placeholder="E-mail">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="package">แพคเกจ</label>
+                            <select type="text" name="package" id="package" class="form-control" placeholder="บัญชีธนาคาร">
+                                <option value="">กรุณาเลือกแพคเกจ</option>
+                                <option value="Diamond">Diamond</option>
+                                <option value="Dealer">Dealer</option>
+                                <option value="VIP">VIP</option>                    
+                            </select>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label for="short">ชื่อจริง-นามสกุลผู้ถือบัญชีธนาคาร</label>
+                            <input type="text" name="accountname" id="accountname" class="form-control"
+                                placeholder="ชื่อจริง-นามสกุลผู้ถือบัญชีธนาคาร">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="accountnumber">หมายเลขบัญชีธนาคาร</label>
+                            <input type="text" pattern="[0-9]{1,}" title="กรอกตัวเลขเท่านั้น" name="accountnumber" id="accountnumber" class="form-control" required
+                                placeholder="หมายเลขบัญชีธนาคาร">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="short">สาขาบัญชีธนาคาร</label>
+                            <input type="text" name="branch" id="branch" class="form-control"
+                                placeholder="สาขาบัญชีธนาคาร">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="recommender">รหัสผู้แนะนำ</label>
+                            <input type="text" name="recommender" id="recommender" class="form-control"
+                                placeholder="รหัสผู้แนะนำ">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="short">ชื่อ-นามสกุลผู้แนะนำ</label>
+                            <input type="text" name="recommen" id="recommen" class="form-control"
+                                placeholder="ชื่อ-นามสกุลผู้แนะนำ">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="bank">บัญชีธนาคาร</label>
+                            <select type="text" name="bank" id="bank" class="form-control" placeholder="บัญชีธนาคาร">
+                                <option value="">กรุณาเลือกบัญชีธนาคาร</option>
+                                <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                                <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                                <option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา</option>
+                                <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                                <option value="ธนาคารเกียรตินาคินภัทร">ธนาคารเกียรตินาคินภัทร</option>
+                                <option value="ธนาคารทหารไทยธนชาติ">ธนาคารทหารไทยธนชาต</option>
+                                <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                                <option value="ธนาคารยูโอบี">ธนาคารยูโอบี</option>
+                                <option value="ธนาคารอิสลามแห่งประเทศไทย">ธนาคารอิสลามแห่งประเทศไทย</option>
+                                <option value="ธนาคารออมสิน">ธนาคารออมสิน</option>                        
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>เพิ่มรูปภาพบัตรประชาชน</label>
+                            <input type="file" name="id_card" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>เพิ่มรูปภาพบัญชีธนาคาร</label>
+                            <input type="file" name="bankaccount" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>เพิ่มรูปภาพสลิป</label>
+                            <input type="file" name="slip" class="form-control" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="address">ที่อยู่</label>
+                            <input type="text" name="address" id="address" class="form-control"
+                                placeholder="ที่อยู่">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="zone">ตำบล</label>
+                            <input type="text" name="zone" id="zone" class="form-control"
+                                placeholder="ตำบล">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="district">อำเภอ</label>
+                            <input type="text" name="district" id="district" class="form-control"
+                                placeholder="อำเภอ">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="province">จังหวัด</label>
+                            <input type="text" name="province" id="province" class="form-control"
+                                placeholder="จังหวัด">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ZIP_code">รหัสไปรษณีย์</label>
+                            <input type="text" pattern="[0-9]{1,}" title="กรอกตัวเลขเท่านั้น"  maxlength="5" minlength="5" name="ZIP_code" id="ZIP_code" class="form-control" required
+                                placeholder="รหัสไปรษณีย์">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-success col-sm-2" type="submit" id="btn" onclick="return confirm('ต้องการเพิ่มสมาชิกไหม')">ตกลง</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

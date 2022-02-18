@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}สมัครสมาชิก{% endblock title %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+<main>
+    <div class="container">
+        <div class="text-center mb-4">
+            <img class="mb-4" src="{% static 'img/logo.png' %}" alt="" width="105" height="77.63">
+            <h4 class="h4 mb-3 font-weight-normal">โปรแกรมสมัครสมาชิก Richest Grows</h4>
+        </div>
+        <div class="row" style="margin-bottom: 5%;margin-top:2%">
+            {% for package in package %}
+            <div class="col-md-4" style="margin-bottom: 5%;">
+                <img class="shadow  rounded" src="{{package.image_package.url}}" alt="HTML tutorial" style="width: 100%;">
+                <br>
+                <h4>สมัครสมาชิก Richest Grows </h4>
+                <h4>ตำแหน่ง {{package.name_package}}</h4>
+                <p>{{package.price_package|intcomma}} บาท</p>
+                <a href="{% url 'billDetail' package.id %}"><button class="btn-btn">สมัครสมาชิก</button></a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="add1"></div>
+
+        <div style="text-align: center;">
+            <b style="font-size: 2rem;color:#d39e00;">Product Richest Grows</b>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-md-center">
+                {% for products in products %}
+                <div class="col-md mb-2">
+                    <img src="{{products.image.url}}" alt="HTML tutorial" style="width: 100%;">
+                    <h4 style="text-align: center;">{{products.name}}</h4>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

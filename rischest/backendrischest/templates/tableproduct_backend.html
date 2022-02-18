@@ -1,0 +1,74 @@
+{% extends "base_backend.html" %}
+{% block title %}ตารางแสดงสินค้า{% endblock title %}
+{% load humanize %}
+{% load thaidate %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">ข้อมูลการสั่งซื้อ</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'addproduct_backend' %}">เพิ่มสินค้า</a></li>
+            <li class="breadcrumb-item active">ข้อมูลการสั่งซื้อ</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ข้อมูลการสั่งซื้อ
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">ชื่อสินค้า</th>
+                            <th style="text-align: center;">หมวดหมู่สินค้า</th>
+                            <th style="text-align: center;">ชื่อเล่นหมวดหมู่สินค้า</th>
+                            <th style="text-align: center;">ราคาสินค้า</th>
+                            <th style="text-align: center;">รูปภาพสินค้า</th>
+                            <th style="text-align: center;">จำนวนสินค้า</th>
+                            <th style="text-align: center;">วันเพิ่มสินค้า</th>
+                            <th style="text-align: center;">วันอัพเดตสินค้า</th>
+                            <th style="text-align: center;">สถานะ</th>
+                            <th style="text-align: center;"><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>โทรศัพท์</th>
+                            <th>ที่อยู่</th>
+                            <th>ตำบล</th>
+                            <th>อำเภอ</th>
+                            <th>จังหวัด</th>
+                            <th>รหัสไปรษณีย์</th>
+                            <th>วันเวลาสั่งซื้อ</th>
+                            <th>สถานะ</th>
+                            <th><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{product.name}}</td>
+                            <td style="text-align: center;">{{product.category}}</td>
+                            <td>{{product.slug}}</td>
+                            <td style="text-align: center;">{{product.price|intcomma}} บาท</td>
+                            <td style="text-align: center;"><img src="{{product.image.url}}" width="64px;" alt=""></td>
+                            <td style="text-align: center;">{{product.stock|intcomma}} ชิ้น</td>
+                            <td>{{product.created|thaidate:"D d M Y เวลาH:i"}}</td>
+                            <td>{{product.update|thaidate:"D d M Y เวลาH:i"}}</td>
+                            {% if product.available == True %}
+                            <td style="text-align: center; color: green">พร้อมขาย</td>
+                            {% else %}
+                            <td style="text-align: center; color: red;">ไม่พร้อมขาย</td>
+                            {% endif %}
+                            <td style="text-align: center;"><a href="{% url 'detail' product.id %}" class="btn btn-warning" role="button">แก้ไข</a> / <a href="{% url 'remove_product' product.id %}" class="btn btn-danger" role="button" onclick="return confirm('คุณต้องการลบใช่หรือไม่ ?')">ลบ</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

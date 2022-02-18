@@ -1,0 +1,73 @@
+{% load static %}
+{% load thaidate %}
+{% load humanize %}
+{% block body %}
+<div id="sale" class="tabcontent">
+    <span class="navbar-text">
+        <h5>&nbsp;ยอดขาย</h5>
+    </span>
+    <div class="container px-1 px-sm-5 mx-auto">
+        <form action="" id="" method="get">
+            จาก<input type="date" name="startdate" id="">&nbsp;
+            ถึง<input type="date" name="enddate" id="">
+            <button type="submit" class="btn" style="color: green;">ตกลง</button>/
+            <button type="reset" class="btn" style="color: red;">ยกเลิก</button>
+        </form>
+    </div>
+    <span class="navbar-text">
+        <h5>&nbsp;ยอดขายส่วนตัว</h5>
+    </span>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col" style="text-align: center;">จำนวนเงิน</th>
+                <th scope="col" style="text-align: center;">วันที่</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sale %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{sale.name}}</td>
+                <td style="text-align: center;">{{sale.income | intcomma}} บาท</td>
+                <td style="text-align: center;">{{sale.datetime | thaidate:"d/M/Y"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <div class="container px-1 px-sm-5 mx-auto">
+        <form action="">
+            จาก<input type="date" name="" id="">&nbsp;
+            ถึง<input type="date" name="" id="">
+            <button type="submit" class="btn" style="color: green;">ตกลง</button>/
+            <button type="reset" class="btn" style="color: red;">ยกเลิก</button>
+        </form>
+    </div>
+    <span class="navbar-text">
+        <h5>&nbsp;ยอดขายทีม</h5>
+    </span>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col" style="text-align: center;">จำนวนเงิน</th>
+                <th scope="col" style="text-align: center;">วันที่</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale_team in sale_team %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{sale_team.team_name}}</td>
+                <td style="text-align: center;">{{sale_team.income}} บาท</td>
+                <td style="text-align: center;">{{sale_team.date | thaidate:"d/M/Y"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}

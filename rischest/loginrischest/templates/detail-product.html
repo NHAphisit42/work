@@ -1,0 +1,47 @@
+{% extends 'home_base.html' %}
+{% block title %}{{product.name}}{% endblock title %}
+{% load static %}
+{% block body %}
+<main>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <img src="{{product.image.url}}" class="img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-6 mt-4">
+                <h1>ชื่อสินค้า {{product.name}}</h1>
+                <h6>{{product.category}}</h6>
+                <h5>ราคาสินค้า {{product.price}} บาท</h5>
+                <p>มีจำนวนสินค้าทั้งหมด {{product.stock}} ชิ้น</p>
+                <div class="d-flex justify-content-center mb-3" style="align-items: center;">
+                    จำนวน
+                    <form id='myform' method='POST' action='#' class="d-flex justify-content-center" style="height: 30px;">
+                        <input type='button' value='-' class='qtyminus btn-input' field='quantity' style="margin-right: 15px;" />
+                        <input type='text' name='quantity' value='{{quantity}}' style="width: 20%;/* padding-left: 20px; */text-align: center;margin:0px 0px 0px 0px;" />
+                        <input type='button' value='+' class='qtyplus btn-input' field='quantity' style="margin-left: 15px;" />
+                    </form>
+                </div>
+                <div class="row d-flex justify-content-center mt-2">
+                    {% if product.stock <= 0 %}
+                        <h5 class="text-danger">สินค้าหมด</h5>
+                    {% else %}
+                        <div class="col-sm-6 mb-3">
+                            <a href="{%url 'addCart' product.id %}" class="btn " id="border-radius">เพิ่มลงในตะกร้า</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{%url 'addCart' product.id %}" class="btn btn-warning ">สั่งซื้อ</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="d-tail mt-4">
+                    <h5 class="py-3 px-3">รายละเอียด</h5>
+                </div>
+                <div class="mt-3">{{product.description | safe}}</div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="{% static 'script.js' %}"></script>
+{% endblock body %}

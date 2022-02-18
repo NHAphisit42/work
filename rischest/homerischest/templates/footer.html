@@ -1,0 +1,43 @@
+{% load static %}
+<main>
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white " style="background-color: rgba(0, 0, 0, 0.2);">
+        <!-- Copyright -->
+        <div class="text-center p-3 example">
+            <p> บริษัท พันล้านความงาม จำกัด<br>
+                444 ม. 4 ต.บางบ่อ อ.บางบ่อ จ.สมุทรปราการ 10560</p>
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-sm-2">
+                    <a href="tel:0954953878" target="_brank">
+                        <img src="{% static 'icon/phone.png' %}">
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="http://line.me/ti/p/~@richesthome" terget="_brank">
+                        <img src="{% static 'icon/line.png' %}">
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="https://www.facebook.com/richestglobal" target="_brank">
+                        <img src="{% static 'icon/facebook.png' %}">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <div class="navbar">
+        <div class="navbar-fixed-top">
+            <div class="container" style="width: auto;">
+                <div class="nav-collapse" id="nav-collapse">
+                    <ul class="nav" id="nav">
+                        <li id="link"><a href="{% url 'admin' %}">admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,76 @@
+{% extends 'base_backend.html' %}
+{% block title %}การสั่งซื้อ{% endblock title %}
+{% load thaidate %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">ข้อมูลการสั่งซื้อ</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item active">ข้อมูลการสั่งซื้อ</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ข้อมูลการสั่งซื้อ
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">ชื่อ-นามสกุล</th>
+                            <th style="text-align: center;">แพจเกจ</th>
+                            <th style="text-align: center;">โทรศัพท์</th>
+                            <th style="text-align: center;">ที่อยู่</th>
+                            <th style="text-align: center;">ตำบล</th>
+                            <th style="text-align: center;">อำเภอ</th>
+                            <th style="text-align: center;">จังหวัด</th>
+                            <th style="text-align: center;">รหัสไปรษณีย์</th>
+                            <th style="text-align: center;">วันเวลาสั่งซื้อ</th>
+                            <th style="text-align: center;">สถานะ</th>
+                            <th style="text-align: center;"><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>โทรศัพท์</th>
+                            <th>ที่อยู่</th>
+                            <th>ตำบล</th>
+                            <th>อำเภอ</th>
+                            <th>จังหวัด</th>
+                            <th>รหัสไปรษณีย์</th>
+                            <th>วันเวลาสั่งซื้อ</th>
+                            <th>สถานะ</th>
+                            <th><i class="fas fa-file-alt"></i></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for member in member %}
+                          <tr>
+                            <td>{{member.name}}</td>
+                            <td>{{member.package}}</td>
+                            <td>{{member.phone}}</td>
+                            <td>{{member.address}}</td>
+                            <td>{{member.zone}}</td>
+                            <td>{{member.district}}</td>
+                            <td>{{member.province}}</td>
+                            <td style="text-align: center;">{{member.ZIP_code}}</td>
+                            <td style="text-align: center;">{{member.date|thaidate:"D d M Y เวลา H:i น."}}</td>
+                            {% if member.status_delivery == None %}
+                            <td style="text-align: center; color: orange;">รอการจัดส่ง</td>
+                            {% elif member.status_delivery == True %}
+                            <td style="text-align: center; color: green;">จัดส่งแล้ว</td>
+                            {% else %}
+                            <td style="text-align: center; color: red;">จัดส่งไม่สำเร็จ</td>
+                            {% endif %}
+                            <td><a href="{% url 'orderdetail' member.id %}" class="btn btn-warning" role="button">คำสั่ง</a> / <a class="btn btn-danger" role="button" href="{% url 'remove' member.id %}" onclick="return confirm('คุณต้องการลบใช่หรือไม่ ?')">ลบ</a></td>
+                        </tr>
+                        {% endfor %}   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

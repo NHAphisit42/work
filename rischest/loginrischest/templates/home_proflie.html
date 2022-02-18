@@ -1,0 +1,99 @@
+{% extends 'home_base.html' %}
+{% block title %}ข้อมูลส่วนตัว{% endblock title %}
+{% block body %}
+<main>
+    <div class="container">
+        <div class="sidebar mb-5" id="menutab">
+            <a class="" href="">ประวัติส่วนตัว</a>
+            <a href="{% url 'Order_History' %}">ประวัติการสั่งซื้อ</a>
+            <button class="dropdown-btn">กำไรจากระบบ &nbsp; <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{% url 'home_sale' %}">ยอดขาย</a>
+                <a href="{% url 'home_recommend' %}">ค่าแนะนำ</a>
+                <a href="{% url 'home_point' %}">คะแนนสะสม</a>
+                <a href="{% url 'home_bonus' %}">โบนัสคนสร้างทีม</a>
+            </div>
+        </div>
+
+        <div class="content" id="content">
+            <form action="{% url 'update_profile' %}" method="post">
+                {% csrf_token %}
+                <div class="container">
+                    <h3>ประวัติส่วนตัว</h3>
+                    <!-- <p>Please fill in this form to create an account.</p> -->
+                    <hr>
+                    {% if user.is_authenticated %}
+                    <label for="email"><b>ชื่อ - นามสกุล</b></label>
+                    <input type="text" name="name" id="name" value="{{user.member.name}}" disabled>
+                    <label for="email"><b>รหัสสมาชิก</b></label>
+                    <input type="text" name="username" id="username" value="No. {{user.member.username}}" disabled>
+                    <label for="email"><b>ตำแหน่ง</b></label>
+                    <input type="text" name="package" id="package" value="{{user.member.package}}" disabled>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" name="useremail" id="useremail" value="{{user.member.useremail}}">
+                    <label for="email"><b>เบอร์โทรศัพท์</b></label>
+                    <input type="text" name="phone" id="phone" value="{{user.member.phone}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="email"><b>รายละเอียดที่อยู่</b></label>
+                            <input type="text" placeholder="เช่น บ้านเลขที่, ซอย, ถนน" name="address"
+                                value="{{user.member.address|default_if_none:''}}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="psw"><b>ตำบล/แขวง</b></label>
+                            <input type="text" placeholder="กรอกตำบล/แขวง" name="zone"
+                                value="{{user.member.zone|default_if_none:''}}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email"><b>อำเภอ/เขต</b></label>
+                            <input type="text" placeholder="กรอกอำเภอ/เขต" name="district"
+                                value="{{user.member.district|default_if_none:''}}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="psw"><b>จังหวัด</b></label>
+                            <input type="text" placeholder="กรอกจังหวัด" name="province"
+                                value="{{user.member.province|default_if_none:''}}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="psw"><b>รหัสไปรษณีย์</b></label>
+                            <input type="text" placeholder="กรอกรหัสไปรษณีย์" pattern="[0-9]{1,}" maxlength="5"
+                                minlength="5" name="ZIP_code" value="{{user.member.ZIP_code|default_if_none:''}}"
+                                required>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="registerbtn">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    $(document).ready(function () {
+        //ขั้นตอนแรกทำการสั่งให้รับค่า attribute จาก tag a จากการคลิ๊กก่อน
+        $(".sidebar a").click(function () {
+            //ให้ทำการโหลดหน้าเว็บโดยรับค่าจาก attribute ของ tag a ลงใน .container
+            $(".content").load($(this).attr("href"));
+            return false;
+        });
+    });
+</script>
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>
+{% endblock body %}

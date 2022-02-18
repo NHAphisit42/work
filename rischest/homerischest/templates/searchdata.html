@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock title %}
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        {% for post in post %}
+        <p class="lead">
+            ชื่อ : {{post.name}}
+            เบอร์โทรศัทพ์ : {{post.phone}} <br>
+            แพคเกจ : {{post.package}}
+        </p>
+        <a class="btn btn-primary btn-lg" href="{% url 'payment' post.id %}" role="button">แจ้งการโอนชำระสมัครสมาชิก</a>
+        <br><br><hr>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

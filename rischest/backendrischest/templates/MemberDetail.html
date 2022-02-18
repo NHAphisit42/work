@@ -1,0 +1,151 @@
+{% extends 'base_backend.html' %}
+{% block title %}รายละเอียดสมาชิก{% endblock title %}
+{% block body %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">รายละเอียดสมาชิก</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'home_backend' %}">หน้าหลัก</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'member_backend' %}">ย้อนกลับ</a></li>
+            <li class="breadcrumb-item active">รายละเอียดสมาชิก</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ชื่อ-นามสกุล : {{member.name}} / วันที่โอน : {{member.date|date:"d M Y"}} 
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="col-12" style="margin-top: 3%;">
+                        <label for="recommend" class="form-label">
+                            <h6><b>ข้อมูลส่วนตัว</b></h6>
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <div class="from-group col-md-2">
+                            <label for="">รหัสสมาชิก</label>
+                            <select name="username" id="" class="form-select">
+                                <option value="">{{member.username}}</option>
+                                <option value="">-----</option>
+                                {% for username in username %}
+                                <option value="">{{username.username}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="gender">คำนำหน้า</label>
+                            <select id="gender" class="form-control" name="gender">
+                                <option selected>{{member.gender}}</option>
+                                <option>เลือก...</option>
+                                <option value="นาย">นาย</option>
+                                <option value="นางสาว">นางสาว</option>
+                                <option value="นาง">นาง</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="name">ชื่อจริง</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{member.name}}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="package">ตำแหน่ง</label>
+                            <input type="text" name="package" id="package" class="form-control" value="{{member.package}}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="phone">เบอร์โทรศัพท์</label>
+                            <input type="text" class="form-control" name="phone" value="{{member.phone}}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="useremail">อีเมล</label>
+                            <input type="text" name="useremail" id="useremail" class="form-control" value="{{member.useremail}}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="accountname">ชื่อบัญชี</label>
+                            <input type="text" name="accountname" id="accountname" class="form-control" value="{{member.accountname}}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="accountnumber">เลขที่บัญชี</label>
+                            <input type="text" class="form-control" name="accountnumber" id="accountnumber" value="{{member.accountnumber}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="bank">ชื่อธนาคาร</label>
+                            <select id="bank" name="bank" class="form-select" required>
+                                <option selected value="">{{member.bank}}</option>
+                                <option>กรุณาเลือกธนาคาร</option>
+                                <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                                <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                                <option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา</option>
+                                <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                                <option value="ธนาคารเกียรตินาคินภัทร">ธนาคารเกียรตินาคินภัทร</option>
+                                <option value="ธนาคารทหารไทยธนชาต">ธนาคารทหารไทยธนชาต</option>
+                                <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                                <option value="ธนาคารยูโอบี">ธนาคารยูโอบี</option>
+                                <option value="ธนาคารอิสลามแห่งประเทศไทย">ธนาคารอิสลามแห่งประเทศไทย</option>
+                                <option value="ธนาคารออมสิน">ธนาคารออมสิน</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="branch" class="form-label">สาขา</label>
+                            <input type="text" class="form-control" name="branch" id="branch" value="{{member.branch}}">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-12" style="margin-top: 3%;">
+                        <label for="recommend" class="form-label">
+                            <h6><b>ข้อมูลผู้แนะนำ</b></h6>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-4" style="margin-top: 0%;">
+                            <label for="recommender" class="form-label">รหัสผู้แนะนำ</label>
+                            <input type="text" class="form-control" id="recommender" name="recommender" value="{{member.recommender}}">
+                        </div>
+                        <div class="col-md-8" style="margin-top: 0%;">
+                            <label for="recommen2" class="form-label">ชื่อผู้แนะนำ</label>
+                            <input type="text" class="form-control" id="recommen2" name="recommen" value="{{member.recommen}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="col-md-4" style="margin-top: 0%;">
+                            <label for="input" class="form-label">บัตรประจำตัวประชาชน</label>
+                        </div>
+                        <div class="col-md-8" style="margin-top: 0%;">
+                            <div name="image_id_card">
+                                <img src="{{member.image_id_card.url}}" width="600px" height="300px" class="rounded" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4" style="margin-top: 0%;">
+                            <label for="input" class="form-label">สมุดบัญชีธนาคาร</label>
+                        </div>
+                        <div class="col-md-8" style="margin-top: 0%;">
+                            <div name="image_bank_account">
+                                <img src="{{member.image_bank_account.url}}" width="600px" height="300px" class="rounded" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4" style="margin-top: 0%;">
+                            <label for="input" class="form-label">สลิปการโอน</label>
+                        </div>
+                        <div class="col-md-8" style="margin-top: 0%;">
+                            <div name="image_slip">
+                                <img src="{{member.image_slip.url}}" width="600px" height="300px" class="rounded" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="success()">ตกลง</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}
